@@ -5,8 +5,11 @@ module.exports = {
       res.send({ hi: 'there' });
   },
 
-  create(req, res) {
-    console.log(req.body);
-    res.send({ hi: 'there' });
+  create(req, res, next) {
+    const sportcomplexProps = req.body;
+
+    SportComplex.create(sportcomplexProps)
+        .then(sportcomplex => res.send(sportcomplex))
+        .catch(next);
   }
 };
