@@ -8,10 +8,3 @@ before(done => {
             console.warn('Warning', error);
         });
 });
-
-beforeEach(done => {
-    const { sportcomplexes } = mongoose.connection.collections;
-    sportcomplexes.drop()
-        .then(() => done())
-        .catch(() => done());
-});

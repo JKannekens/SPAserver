@@ -6,9 +6,25 @@ const app = require('../../app');
 const SportComplex = mongoose.model('sportcomplex');
 
 describe('Sportcomplexes controller', () => {
-    // it('GET to /api/sportcomplexes reads all the sportcomplexes', done => {
-    //
-    // });
+    beforeEach(done => {
+        const { sportcomplexes } = mongoose.connection.collections;
+        sportcomplexes.drop()
+            .then(() => done())
+            .catch(() => done());
+    });
+
+    it('GET to /api/sportcomplexes reads all the sportcomplexes', done => {
+        SportComplex.count().then(count => {
+            request(app)
+                .get('/api/sportcomplexes')
+                .end(() => {
+                    SportComplex.count().then(newCount => {
+                        assert(count === newCount);
+                        done();
+                    });
+                });
+        });
+    });
 
     it('GET to /api/sportcomplexes/:id reads the selected sportcomplex', done => {
         const sportcomplex = new SportComplex({
@@ -100,8 +116,6 @@ describe('Sportcomplexes controller', () => {
             });
         });
     });
-
-
 
 
 
