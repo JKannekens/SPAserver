@@ -12,7 +12,7 @@ describe('Events controller', () => {
             .then(() => done())
             .catch(() => done());
     });
-    
+
     it('GET to /api/events reads all the events', done => {
         Event.count().then(count => {
             request(app)

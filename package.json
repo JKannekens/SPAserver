@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "set NODE_ENV=test&& nodemon --exec mocha --recursive -R min"
+    "test": "set NODE_ENV=test&& nodemon --exec mocha --recursive -R min",
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
