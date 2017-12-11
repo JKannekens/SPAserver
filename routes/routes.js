@@ -1,5 +1,6 @@
 const SportComplexesController = require('../controllers/sportcomplexes_controller');
 const EventsController = require('../controllers/events_controller');
+const SportsController = require('../controllers/sports_controller');
 
 module.exports = (app) => {
 
@@ -14,4 +15,8 @@ module.exports = (app) => {
     app.post('/api/events', EventsController.create);
     app.put('/api/events/:id', EventsController.edit);
     app.delete('/api/events/:id', EventsController.delete);
+
+    app.get('/api/sports', SportsController.readAll);
+    app.get('/api/sports/:id', SportsController.readOne);
+    app.post('/api/sports', SportsController.create);
 };

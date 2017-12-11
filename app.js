@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+const logger = require('morgan');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 const app = express();
@@ -9,7 +11,9 @@ if (process.env.NODE_ENV !== 'test') {
     mongoose.connect('mongodb://localhost/Zaalvoetbal', { useMongoClient: true });
 }
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 // CORS headers for local deploy
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
