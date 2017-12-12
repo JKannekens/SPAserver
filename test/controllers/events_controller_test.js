@@ -6,6 +6,15 @@ const app = require('../../app');
 const Event = mongoose.model('event');
 
 describe('Events controller', () => {
+    before(done => {
+        mongoose.connect('mongodb://localhost/Zaalvoetbal_test', { useMongoClient: true });
+        mongoose.connection
+            .once('open', () => done())
+            .on('error', err => {
+                console.warn('Warning', error);
+            });
+    });
+
     beforeEach(done => {
         const { events } = mongoose.connection.collections;
         events.drop()

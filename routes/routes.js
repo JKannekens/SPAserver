@@ -18,5 +18,9 @@ module.exports = (app) => {
 
     app.get('/api/sports', SportsController.readAll);
     app.get('/api/sports/:id', SportsController.readOne);
-    app.post('/api/sports', SportsController.create);
+    app.post('/api/sports', SportsController.createSport);
+    app.post('/api/attributes', SportsController.createAttribute);
+    app.post('/api/sports/attribute', SportsController.addAttributeToSport);
+    app.put('/api/sports/:id', SportsController.updateSport);
+    app.delete('/api/sports/:id', SportsController.removeSport);
 };
