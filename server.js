@@ -98,9 +98,7 @@ app.use('*', function (req, res) {
 });
 
 // Installatie klaar; start de server.
-app.listen(config.env.webPort, function () {
-    console.log('De server luistert op port ' + app.get('port'));
-});
+app.listen(config.env.webPort || 5000);
 
 // Voor testen met mocha/chai moeten we de app exporteren.
 module.exports = app;
