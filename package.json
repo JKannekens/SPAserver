@@ -2,10 +2,10 @@
   "name": "spaserver",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "set NODE_ENV=test&& nodemon --exec mocha --recursive -R min",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
