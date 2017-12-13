@@ -33,12 +33,12 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('*', function (req, res) {
-    res.status(400);
-    res.json({
-        'error': 'Deze URL is niet beschikbaar.'
-    });
-});
+// app.use('*', function (req, res) {
+//     res.status(400);
+//     res.json({
+//         'error': 'Deze URL is niet beschikbaar.'
+//     });
+// });
 
 routes(app);
 
