@@ -7,10 +7,10 @@ const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 const app = express();
 
-mongoose.Promise = global.Promise;
-if (process.env.NODE_ENV !== 'test') {
-    mongoose.connect('mongodb://localhost/Zaalvoetbal', { useMongoClient: true });
-}
+// mongoose.Promise = global.Promise;
+// if (process.env.NODE_ENV !== 'test') {
+//     mongoose.connect('mongodb://localhost/Zaalvoetbal', { useMongoClient: true });
+// }
 
 app.set('port', (process.env.PORT || config.env.webPort));
 app.set('env', (process.env.ENV || 'development'));
