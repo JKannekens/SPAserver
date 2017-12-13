@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+var config = require('./config/env/env');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
@@ -10,6 +11,9 @@ mongoose.Promise = global.Promise;
 if (process.env.NODE_ENV !== 'test') {
     mongoose.connect('mongodb://localhost/Zaalvoetbal', { useMongoClient: true });
 }
+
+app.set('port', (process.env.PORT || config.env.webPort));
+app.set('env', (process.env.ENV || 'development'));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -27,6 +31,13 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     // Pass to next layer of middleware
     next();
+});
+
+app.use('*', function (req, res) {
+    res.status(400);
+    res.json({
+        'error': 'Deze URL is niet beschikbaar.'
+    });
 });
 
 routes(app);
