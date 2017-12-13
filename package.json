@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "set NODE_ENV=test&& nodemon --exec mocha --recursive -R min",
-    "start": "nodemon server.js"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +19,14 @@
     "neo4j-driver": "^1.5.1",
     "request": "^2.83.0",
     "supertest": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-istanbul": "^1.1.2",
+    "gulp-mocha": "^4.3.1",
+    "mocha": "^3.3.0",
+    "nodemon": "^1.11.0"
   }
 }
