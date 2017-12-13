@@ -5,35 +5,50 @@ var session = driver.session();
 
 module.exports = {
     readAll(req, res) {
-        session.run("MATCH (n:Sport) RETURN n")
-            .then((result) => {
-            const sportArr = [];
-            result.records.forEach((record) => {
-                sportArr.push({
-                    id: record._fields[0].identity.low,
-                    name: record._fields[0].properties.name
-                })
-            });
-            res.status(200)
-            res.json(sportArr);
-            session.close();
-            });
+        session.run("MATCH (a: Sport) RETURN a")
+            .then(result => {
+                var sportArray = [];
+
+                result.records.forEach(record => {
+                   sportArray.push({
+                       id: record._fields[0].identity.low,
+                       name: record._fields[0].properties.name,
+                   });
+                   console.log(record._fields[0]);
+                });
+                    res.status(200);
+                    res.json(sportArray);
+                    session.close();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
     },
 
     readOne(req, res) {
         var id = req.params.id;
-        session.run("MATCH(a:Sport) WHERE id(a)=toInt({idParam}) RETURN a", {idParam: id})
-            .then((result) => {
-                const sportArr = [];
-                result.records.forEach((record) => {
-                    sportArr.push({
-                        id: record._fields[0].identity.low,
-                        name: record._fields[0].properties.name
+        session.run("MATCH(a:Sport) WHERE id(a)=toInt({idParam}) RETURN a.name as name", {idParam: id})
+            .then(function (result) {
+                var name = result.records[0].get("name");
+
+                session
+                    .run("OPTIONAL MATCH (a:Sport)-[r:NEEDS]-(b:Attribute) WHERE id(a)=toInt({idParam}) RETURN b.attributeName as attributeName, r.attributeAmount as attributeAmount", {idParam: id})
+                    .then(function (result2) {
+                        var attributeName = result2.records[0].get("attributeName");
+                        var attributeAmount = result2.records[0].get("attributeAmount");
+
+                        res.json({
+                            id: id,
+                            name: name,
+                            attributeName: attributeName,
+                            attributeAmount: attributeAmount
+                    });
+
+                        session.close();
                     })
-                });
-                res.status(200)
-                res.json(sportArr);
-                session.close();
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             });
     },
 
