@@ -1,6 +1,6 @@
 var neo4j = require('neo4j-driver').v1;
 
-var driver = neo4j.driver("bolt://localhost", neo4j.auth.basic("neo4j", "123456"));
+var driver = neo4j.driver("bolt://hobby-dflldbopnnhggbkekoobjjal.dbs.graphenedb.com:24786", neo4j.auth.basic("admin", "b.B0ULk9Oq8gDa.RSYRO96Lwsx1au4a"));
 var session = driver.session();
 
 module.exports = {
