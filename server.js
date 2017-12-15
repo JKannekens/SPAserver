@@ -11,6 +11,8 @@ var routes = require('./routes/routes');
 var config = require('./config/env/env');
 // var expressJWT = require('express-jwt');
 
+// GEMAAKT DOOR JUSTIN KANNEKENS 2013238
+
 var app = express();
 
 // Met module.exports kunnen we variabelen beschikbaar maken voor andere bestanden.
